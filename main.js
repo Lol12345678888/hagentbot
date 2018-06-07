@@ -103,7 +103,43 @@ client.on("message", (message) => {
       message.channel.send("pong!");
     }
   });
-
+  client.on('voiceStateUpdate', (mold, mnew) => {
+    let guild = mnew.guild
+          
+      let vold = mold.voiceChannel
+      let vnew = mnew.voiceChannel
+      let logchan = guild.channels.get("451087272293433344")
+      if(!logchan) return
+      if (!vold && vnew) {
+          let joinEmbed = new Discord.RichEmbed()
+              .setDescription(`:white_check_mark: **${mnew.displayName}** ist **\`${vnew.name}\`** Beigetreten`)
+              .setTimestamp()
+              .setColor('#5aed21')
+              .setThumbnail(mnew.user.avatarURL)
+              .setFooter(`Beauftragt von ${client.users.get("410786268616720395").username}`, client.users.get('410786268616720395').avatarURL)
+          logchan.send(joinEmbed)
+      }
+      else if (vold && !vnew) {
+          let leftEmbed = new Discord.RichEmbed()
+              .setTitle('')                  
+              .setDescription(`:small_red_triangle_down: **${mnew.displayName}** Hat **\`${vold.name}\`** verlassen`)
+              .setTimestamp()
+              .setThumbnail(mnew.user.avatarURL)
+              .setColor("#e50b16")
+              .setFooter(`Beauftragt von ${client.users.get("410786268616720395").username}`, client.users.get('410786268616720395').avatarURL)
+              logchan.send(leftEmbed)      
+      }
+      else if (vold && vnew && vold.id != vnew.id) {
+          let wentEmbed = new Discord.RichEmbed()
+              .setTitle('')
+              .setDescription(`:arrow_right: **${mnew.displayName}** ist von **\`${vold.name}\`** zu **\`${vnew.name}\`** gesprungen`)
+              .setTimestamp()
+              .setThumbnail(mnew.user.avatarURL)
+              .setColor("#0be5d2")
+              .setFooter(`Beauftragt von ${client.users.get("410786268616720395").username}`, client.users.get('410786268616720395').avatarURL)
+          logchan.send(wentEmbed)        
+      }
+    }) 
   
  
 
