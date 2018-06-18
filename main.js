@@ -34,9 +34,8 @@ var cmdmap = {
     say:        cmd_say,
     emotes:     cmd_emotes,
     help:       cmd_help,
-    status:     cmd_status
-    
-
+    status:     cmd_status,
+    psay: cmd_psay
 }
 
 
@@ -70,6 +69,18 @@ function cmd_status(msg, args){
     msg.channel.send(statusembed)
     
 }
+function cmd_psay(msg, args){
+    let = psayMEMBER = msg.mentions.members.first()
+    
+    psayMEMBER.send(args.join(" "))
+    msg.delete()
+    let _Embed = new Discord.RichEmbed()
+    .setTitle(`Nachricht gesendet`)
+    .setColor("#56f442")
+    .addField("Gesendet an", psayMEMBER.user.username)
+    .addField("Mit der Nachricht", args.join(" "))
+    msg.channel.send(_Embed)
+}
 function cmd_help(msg, args){
     Embeds.grün(msg.channel, `Bot von Lulu0508 Programmiert
 _help
@@ -88,7 +99,7 @@ client.on('message', (msg) =>{
         chan   = msg.channel,
         guild  = msg.guild
 
-        if(author.id != client.user.id && cont.startsWith(config.prefix)) {
+        if(cont.startsWith(config.prefix)) {
 
         var invoke = cont.split(' ')[0].substr(config.prefix.length)
             args   = cont.split(' ').slice(1)
@@ -103,6 +114,7 @@ client.on("message", (message) => {
       message.channel.send("pong!");
     }
   });
+
   client.on('voiceStateUpdate', (mold, mnew) => {
     let guild = mnew.guild
           
@@ -140,7 +152,6 @@ client.on("message", (message) => {
           logchan.send(wentEmbed)        
       }
     }) 
-  
  
 
 client.login(process.env.token)
