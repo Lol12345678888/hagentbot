@@ -71,7 +71,8 @@ function cmd_status(msg, args){
 }
 function cmd_psay(msg, args){
     let = psayMEMBER = msg.mentions.members.first()
-    
+
+   
     psayMEMBER.send(args.join(" "))
     msg.delete()
     let _Embed = new Discord.RichEmbed()
@@ -80,6 +81,7 @@ function cmd_psay(msg, args){
     .addField("Gesendet an", psayMEMBER.user.username)
     .addField("Mit der Nachricht", args.join(" "))
     msg.channel.send(_Embed)
+   
 }
 function cmd_help(msg, args){
     Embeds.grün(msg.channel, `Bot von Lulu0508 Programmiert
@@ -120,8 +122,9 @@ client.on("message", (message) => {
           
       let vold = mold.voiceChannel
       let vnew = mnew.voiceChannel
-      let logchan = guild.channels.get("451087272293433344")
-      if(!logchan) return
+      let hagentlogchan = guild.channels.get("451087272293433344")
+      let pigsellogchan = guild.channels.get("459385383495663626")
+      
       if (!vold && vnew) {
           let joinEmbed = new Discord.RichEmbed()
               .setDescription(`:white_check_mark: **${mnew.displayName}** ist **\`${vnew.name}\`** Beigetreten`)
@@ -129,7 +132,12 @@ client.on("message", (message) => {
               .setColor('#5aed21')
               .setThumbnail(mnew.user.avatarURL)
               .setFooter(`Beauftragt von ${client.users.get("410786268616720395").username}`, client.users.get('410786268616720395').avatarURL)
-          logchan.send(joinEmbed)
+          if(guild.id == "410787388290498561"){
+              hagentlogchan.send(joinEmbed)}else
+            if(guild.id == "364334738418434049"){
+            pigsellogchan.send(joinEmbed)
+            }
+
       }
       else if (vold && !vnew) {
           let leftEmbed = new Discord.RichEmbed()
@@ -139,7 +147,11 @@ client.on("message", (message) => {
               .setThumbnail(mnew.user.avatarURL)
               .setColor("#e50b16")
               .setFooter(`Beauftragt von ${client.users.get("410786268616720395").username}`, client.users.get('410786268616720395').avatarURL)
-              logchan.send(leftEmbed)      
+              if(guild.id == "410787388290498561"){
+                hagentlogchan.send(leftEmbed)}else
+              if(guild.id == "364334738418434049"){
+              pigsellogchan.send(leftEmbed)
+              }   
       }
       else if (vold && vnew && vold.id != vnew.id) {
           let wentEmbed = new Discord.RichEmbed()
@@ -149,9 +161,11 @@ client.on("message", (message) => {
               .setThumbnail(mnew.user.avatarURL)
               .setColor("#0be5d2")
               .setFooter(`Beauftragt von ${client.users.get("410786268616720395").username}`, client.users.get('410786268616720395').avatarURL)
-          logchan.send(wentEmbed)        
+              if(guild.id == "410787388290498561"){
+                hagentlogchan.send(wentEmbed)}else
+              if(guild.id == "364334738418434049"){
+              pigsellogchan.send(wentEmbed)
+              }      
       }
     }) 
- 
-
 client.login(process.env.token)
