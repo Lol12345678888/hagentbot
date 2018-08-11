@@ -35,7 +35,8 @@ var cmdmap = {
     emotes:     cmd_emotes,
     help:       cmd_help,
     status:     cmd_status,
-    psay: cmd_psay
+    psay: cmd_psay,
+    say2: cmd_say2
 }
 
 
@@ -54,6 +55,10 @@ function cmd_say(msg, args) {
             msg.delete()
     }
     if(!msg.member.hasPermission("KICK_MEMBERS")) return msg.reply(`HA haste keine rechte für ne? NOOB!`);
+}
+function cmd_say(msg, args) {
+    if(!args) return msg.channel.send("WAS SOLL ICH SAGEN MHHH???!")
+    msg.channel.send(args)
 }
 function cmd_status(msg, args){
     let permAdmin = msg.member.hasPermission("ADMINISTRATOR") 
@@ -168,4 +173,6 @@ client.on("message", (message) => {
               }      
       }
     }) 
+ 
+
 client.login(process.env.token)
