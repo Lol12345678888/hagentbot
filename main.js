@@ -127,7 +127,7 @@ client.on("message", (message) => {
           
       let vold = mold.voiceChannel
       let vnew = mnew.voiceChannel
-      let hagentlogchan = guild.channels.get("451087272293433344")
+      let hagentlogchan = guild.channels.get("530479689601646613")
       let pigsellogchan = guild.channels.get("459385383495663626")
       
       if (!vold && vnew) {
