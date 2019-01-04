@@ -35,11 +35,21 @@ var cmdmap = {
     emotes:     cmd_emotes,
     help:       cmd_help,
     status:     cmd_status,
-    psay: cmd_psay,
-    say2: cmd_say2
+    psay:       cmd_psay,
+    say2:       cmd_say2,
+    serversay:  cmd_serversay
 }
 
-
+function cmd_serversay(msg, args){
+    if(msg.member.roles.has('528355485833756683')){
+        Embeds.grün(msg.channel, (args.join(' ')))
+        msg.delete()
+        Embeds.grün(client.channels.get("510807769964740609"), (args.join(' ')))
+    }
+    else{
+        msg.channel.send(`${msg.member} Du hast keine Rechte dafür!`)
+    }
+}
 function cmd_say(msg, args) {
     if(msg.member.hasPermission('KICK_MEMBERS')){
     Embeds.grün(msg.channel, (args.join(' ')))
