@@ -41,13 +41,23 @@ var cmdmap = {
 }
 
 function cmd_serversay(msg, args){
-    if(msg.member.roles.has('528355485833756683')){
-        Embeds.grün(msg.channel, (args.join(' ')))
-        msg.delete()
-        Embeds.grün(client.channels.get("510807769964740609"), (args.join(' ')))
-    }
-    else{
+    let args0 = args[0]
+    if(args0){
+        if(msg.member.roles.has('528355485833756683')){
+        let serversayEmbed = new Discord.RichEmbed()
+        .setTitle("Nachricht vom Hagentserver")
+        .setDescription(args.join(' '))
+        .setFooter(`Nachricht von ${msg.author.tag}`, msg.author.avatarURL)
+        .setTimestamp(new Date)
+        msg.channel.send(serversayEmbed)
+        client.channels.get("510807769964740609").send(serversayEmbed)
+        msg.delete();
+        }
+        else if(!msg.member.roles.has('528355485833756683')){
         msg.channel.send(`${msg.member} Du hast keine Rechte dafür!`)
+        }}
+    else if(args0 == undefined){
+     msg.channel.send("Was soll ich für eine Nachricht senden?")
     }
 }
 function cmd_say(msg, args) {
