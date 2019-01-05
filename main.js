@@ -49,7 +49,7 @@ function cmd_serversay(msg, args){
         .setDescription(args.join(' '))
         .setFooter(`Nachricht von ${msg.author.tag}`, msg.author.avatarURL)
         .setTimestamp(new Date)
-        msg.channel.send(serversayEmbed)
+        client.channels.get("415113700740169728").send(serversayEmbed)
         client.channels.get("510807769964740609").send(serversayEmbed)
         msg.delete();
         }
