@@ -216,4 +216,4 @@ client.on('guildMemberUpdate', (mold, mnew) => {
         }
     })
 
-client.login(config.token)
+client.login(process.env.token)
