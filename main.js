@@ -28,7 +28,8 @@ var cmdmap = {
     status:     cmd_status,
     psay:       cmd_psay,
     say2:       cmd_say2,
-    serversay:  cmd_serversay
+    serversay:  cmd_serversay,
+    permcheck:  cmd_permcheck
 }
 
 function cmd_serversay(msg, args){
@@ -109,7 +110,19 @@ function cmd_emotes(msg, args) {
     const emojiList = msg.guild.emojis.map(e=>e.toString()).join(" ");
     msg.channel.send(emojiList);
 }
+function cmd_permcheck(msg, args){
+    let result = ""
+    Object.entries(Discord.Permissions.FLAGS).forEach(element => {
+        console.log(msg)
+        result+=`${(msg.guild.me.hasPermission(element[0]) ? client.emojis.get("520652527906193419") : client.emojis.get("520652786803933185"))} ${element[0]}\n`
+    });
 
+    var embed = new Discord.RichEmbed()
+    .setTitle(`${client.user.username}'s Permissions on ${msg.guild.name}`)
+    .setDescription(result)
+
+    msg.channel.send(embed)
+}
 
 client.on('message', (msg) =>{
 
